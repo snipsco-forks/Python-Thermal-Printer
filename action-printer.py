@@ -32,7 +32,6 @@ class Skill:
         for l in list_dir :
             tmp = os.listdir(DIR + l)
             self.dir[l] = tmp
-            self.image += tmp
         print(self.image)
         print(self.dir)
         self.queue = Queue.Queue()
@@ -75,7 +74,7 @@ class Skill:
         else:
             img = Image.open(to_print)
             new_width  = 384
-            new_height = new_width * img.size[0] / imge.size[1]
+            new_height = new_width * img.size[0] / img.size[1]
             img = img.resize((new_width, new_height), Image.ANTIALIAS)
             self.printer.printImage(img, True)
         self.printer.feed(3)
