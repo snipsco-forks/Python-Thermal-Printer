@@ -10,6 +10,7 @@ import os
 import random
 from snipshelpers.thread_handler import ThreadHandler
 from snipshelpers.config_parser import SnipsConfigParser
+import time
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
@@ -65,7 +66,12 @@ def callback(hermes, intent_message):
         new_height = new_width * img.size[0] / img.size[1]
         img = img.resize((new_width, new_height), Image.ANTIALIAS)
         skill.printer.printImage(img, True)
-        skill.printer.println("Printed with Snips.ai")
+        time.sleep(0.2)
+        if "maker kit" in to_print:
+            skill.printer.println("Get a discounted kit at:")
+            skill.printer.println("makers.snips.ai/kit/")
+        else:
+            skill.printer.println("Printed with Snips.ai")
     skill.printer.feed(3)
     print(image)
 
