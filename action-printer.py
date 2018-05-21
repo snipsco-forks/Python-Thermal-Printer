@@ -73,7 +73,11 @@ class Skill:
             for i in image:
                 self.printer.println("We do not have an image of " + i + " in this printer.")
         else:
-            self.printer.printImage(Image.open(to_print), True)
+            img = Image.open(to_print)
+            new_width  = 384
+            new_height = new_width * img.size[0] / imge.size[1]
+            img = img.resize((new_width, new_height), Image.ANTIALIAS)
+            self.printer.printImage(img, True)
         self.printer.feed(3)
         print(image)
 
