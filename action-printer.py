@@ -80,5 +80,5 @@ if __name__ == "__main__":
     
     with Hermes(MQTT_ADDR) as h: 
         h.skill = skill
-        h.subscribe_intent("akaisuisei:print", callback) \
+        h.subscribe_intent("print", callback) \
          .loop_forever()
