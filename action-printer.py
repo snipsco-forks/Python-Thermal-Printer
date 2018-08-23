@@ -63,7 +63,9 @@ def callback(hermes, intent_message):
     else:
         img = Image.open(to_print)
         new_width  = 384
-        new_height = new_width * img.size[0] / img.size[1]
+        new_height = new_width * img.size[1] / img.size[0]
+        print(new_width)
+        print(new_height)
         img = img.resize((new_width, new_height), Image.ANTIALIAS)
         skill.printer.printImage(img, True)
         time.sleep(0.2)
