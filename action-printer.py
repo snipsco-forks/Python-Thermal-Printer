@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# -*-: coding utf-8 -*-
+# coding=utf-8
 
 from hermes_python.hermes import Hermes
 import Queue
@@ -69,16 +69,18 @@ def callback(hermes, intent_message):
         img = img.resize((new_width, new_height), Image.ANTIALIAS)
         skill.printer.printImage(img, True)
         time.sleep(0.2)
-        if "maker kit" in to_print:
-            skill.printer.println("Get a discounted kit at:")
-            skill.printer.println("makers.snips.ai/kit/")
-        else:
-            skill.printer.println("Printed with Snips.ai")
+        skill.printer.setCodePage(Adafruit_Thermal.CODEPAGE_ISO_8859_1)
+        skill.printer.println(u"Créez votre propre assistant\nvocal respectueux de la vie\nprivée".encode("latin-1"))
+        skill.printer.println("https://makers.snips.ai")
+        skill.printer.println("#MakeWithSnips")
+        skill.printer.setCodePage(0)
     skill.printer.feed(3)
     print(image)
 
 if __name__ == "__main__":
     skill = Skill()
+    skill.printer.println("Ready!!")
+    skill.printer.feed(3)
     
     with Hermes(MQTT_ADDR) as h: 
         h.skill = skill
